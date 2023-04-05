@@ -1,19 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:twitter_clone/constants/constants.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
-
-import '../../../common reusable widgets/rounded_small_button.dart';
+import '../../../common reusable widgets/export_reusable_widgets.dart';
+import '../../../constants/constants.dart';
 import '../../../theme/theme.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   final appBar = UIConstants.appBar();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -57,14 +56,14 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 RichText(
                     text: TextSpan(
-                        text: textOfDontHaveAcc,
+                        text: textOfAlreadyHaveAcc,
                         style: const TextStyle(
                           color: Pallete.whiteColor,
                           fontSize: 16.0,
                         ),
                         children: [
                       TextSpan(
-                        text: textOfSignUp,
+                        text: textOfLogin,
                         style: const TextStyle(
                           color: Pallete.blueColor,
                           fontSize: 16.0,
