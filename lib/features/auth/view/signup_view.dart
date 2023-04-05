@@ -4,8 +4,12 @@ import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
 import '../../../common reusable widgets/export_reusable_widgets.dart';
 import '../../../constants/constants.dart';
 import '../../../theme/theme.dart';
+import 'login_view.dart';
 
 class SignUpView extends StatefulWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const SignUpView(),
+      );
   const SignUpView({super.key});
 
   @override
@@ -68,7 +72,10 @@ class _SignUpViewState extends State<SignUpView> {
                           color: Pallete.blueColor,
                           fontSize: 16.0,
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(context, LoginView.route());
+                          },
                       )
                     ]))
               ],
