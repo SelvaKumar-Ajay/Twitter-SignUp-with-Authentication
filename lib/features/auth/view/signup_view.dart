@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
 import '../../../common reusable widgets/export_reusable_widgets.dart';
-import '../../../common reusable widgets/loadingpage.dart';
 import '../../../constants/constants.dart';
 import '../../../theme/theme.dart';
 import 'login_view.dart';

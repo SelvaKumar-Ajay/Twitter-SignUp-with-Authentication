@@ -26,15 +26,14 @@ class MyApp extends ConsumerWidget {
       title: 'Twitter',
       theme: AppTheme.theme,
       home: ref.watch(currentUserAccountProvider).when(
-            error: (error, st) => ErrorPage(error: error.toString()),
-            loading: () => const LoginView(),
             data: (user) {
               if (user != null) {
                 return const HomeView();
-              } else {
-                return const SignUpView();
               }
+              return const SignUpView();
             },
+            error: (error, st) => ErrorPage(error: error.toString()),
+            loading: () => const LoginView(),
           ),
     );
   }

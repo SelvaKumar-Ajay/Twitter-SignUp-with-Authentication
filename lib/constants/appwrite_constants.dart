@@ -10,4 +10,5 @@ class AppWriteConstants {
       'https://8080-appwrite-integrationfor-tq1jyi10dis.ws-us93.gitpod.io/console/organization-642ab54c2dc404188506';
   static const String endPointReal =
       'https://8080-appwrite-integrationfor-tq1jyi10dis.ws-us93.gitpod.io/v1';
+  static const String collectionId = '642efc2d35ecb11f00e4';
 }
