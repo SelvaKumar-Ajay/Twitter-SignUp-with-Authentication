@@ -19,12 +19,30 @@ abstract class IAuthAPI {
     required String email,
     required String passWord,
   });
+
+  FutureEither<model.Session> logIn({
+    required String email,
+    required String passWord,
+  });
+
+  Future<model.Account?> getCurrentUserAccount();
 }
 
 class AuthApi implements IAuthAPI {
   final Account _account;
 
   AuthApi({required Account account}) : _account = account;
+
+  @override
+  Future<model.Account?> getCurrentUserAccount() async {
+    try {
+      return await _account.get();
+    } on AppwriteException {
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   FutureEither<model.Account> signUp(
@@ -37,6 +55,20 @@ class AuthApi implements IAuthAPI {
     } on AppwriteException catch (e, StackTrace) {
       return left(
           Failure(e.message ?? "Some Unexpected error occured: ", StackTrace));
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  FutureEither<model.Session> logIn(
+      {required String email, required String passWord}) async {
+    try {
+      final session =
+          await _account.createEmailSession(email: email, password: passWord);
+      return right(session);
+    } on AppwriteException catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
     } catch (e, stackTrace) {
       return left(Failure(e.toString(), stackTrace));
     }

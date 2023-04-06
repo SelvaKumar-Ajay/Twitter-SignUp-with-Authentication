@@ -9,3 +9,5 @@ String textOfDontHaveAcc = "Don't have an account? ";
 String textOfSignUp = "Sign Up";
 String textOfLogin = "Login";
 String textOfAlreadyHaveAcc = "Already have an account? ";
+String textofAccountCreated = "Account Created Please Login";
+String textofLoginSuccessful = "Login Successful";
