@@ -2,9 +2,17 @@
 import 'package:appwrite/appwrite.dart';
 //To get User related data models Account
 import 'package:appwrite/models.dart' as model;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import '../core/core.dart';
 // import 'package:fpdart/fpdart.dart';
+
+final authApiProvider = Provider(
+  (ref) {
+    final accountProvider = ref.watch(appWriteAccountProvider);
+    return AuthApi(account: accountProvider);
+  },
+);
 
 abstract class IAuthAPI {
   FutureEither<model.Account> signUp({
