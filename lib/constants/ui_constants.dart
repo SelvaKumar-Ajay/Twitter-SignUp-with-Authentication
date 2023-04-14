@@ -15,4 +15,10 @@ class UIConstants {
       centerTitle: true,
     );
   }
+
+  static List<Widget> bottomBarPages = const [
+    Text("Tweet Page"),
+    Text("Search Page"),
+    Text("Notification Page"),
+  ];
 }

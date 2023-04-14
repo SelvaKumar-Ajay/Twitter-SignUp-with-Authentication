@@ -5,6 +5,7 @@ import 'package:twitter_clone/features/auth/view/signup_view.dart';
 import 'package:twitter_clone/features/home/view/home_view.dart';
 import 'package:twitter_clone/theme/theme.dart';
 import 'common reusable widgets/error_page.dart';
+import 'constants/constants.dart';
 import 'features/auth/view/login_view.dart';
 // import 'features/auth/view/signup_view.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Twitter',
+      title: textofTweet,
       theme: AppTheme.theme,
       home: ref.watch(currentUserAccountProvider).when(
             data: (user) {

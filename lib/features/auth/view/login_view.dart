@@ -59,6 +59,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       ),
                       AuthReusableTextField(
                           controller: passwordController,
+                          obscureText: true,
                           hintText: textOfPassword),
                       const SizedBox(
                         height: 40.0,

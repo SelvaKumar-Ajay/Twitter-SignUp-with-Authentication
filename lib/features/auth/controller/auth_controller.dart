@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:twitter_clone/apis/auth_api.dart';
 import 'package:twitter_clone/apis/user_api.dart';
 import 'package:twitter_clone/constants/constants.dart';
@@ -14,9 +15,30 @@ final authControllerProvider = StateNotifierProvider<AuthController, bool>(
         authApi: ref.watch(authApiProvider),
         userApi: ref.watch(userApiProvider)));
 
+final currentUserDetailsProvider = FutureProvider(
+  (ref) {
+    final currentUserID =
+        // ref.watch(currentUserAccountProvider).asData.toString();
+        ref.watch(currentUserAccountProvider).value!.$id;
+    debugPrint("currentUserID $currentUserID");
+    final userDetails = ref.watch(userDetailsProvider(currentUserID));
+    debugPrint("userDetails $userDetails.toString()");
+    return userDetails.value;
+  },
+);
+
+final userDetailsProvider = FutureProvider.family(
+  (ref, String uid) {
+    final authController = ref.watch(authControllerProvider.notifier);
+    return authController.getUserData(uid);
+  },
+);
+
 final currentUserAccountProvider = FutureProvider(
   (ref) {
-    return ref.watch(authControllerProvider.notifier).currentUser();
+    final authController =
+        ref.watch(authControllerProvider.notifier).currentUser();
+    return authController;
   },
 );
 
@@ -49,9 +71,10 @@ class AuthController extends StateNotifier<bool> {
           bannerPic: "",
           followers: const [],
           following: const [],
-          uid: '',
-          bio: '',
+          uid: r.$id,
+          bio: "",
           isTwitterBlue: false);
+      debugPrint("signup $r.$id");
       final res2 = await _userApi.saveUserData(userModel);
       res2.fold((l) => showSnackBar(context, l.message), (r) {
         showSnackBar(context, textofAccountCreated);
@@ -72,5 +95,11 @@ class AuthController extends StateNotifier<bool> {
       showSnackBar(context, textofLoginSuccessful);
       Navigator.push(context, HomeView.route());
     });
+  }
+
+  Future<UserModel> getUserData(String uid) async {
+    final document = await _userApi.getUserData(uid);
+    final updateUser = UserModel.fromMap(document.data);
+    return updateUser;
   }
 }
